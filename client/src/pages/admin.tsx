@@ -55,12 +55,12 @@ export default function Admin() {
     );
   }
 
-  if (!user) {
+  if (!user && !isAuthLoading) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-24 text-center">
           <h2 className="text-2xl font-bold text-destructive">Access Denied</h2>
-          <p className="mt-2">Please log in to view this page.</p>
+          <p className="mt-2">Please log in to view this page. (User: {user ? "Logged In" : "Not Logged In"})</p>
           <Button 
             className="mt-4"
             onClick={() => window.location.href = "/api/login"}
