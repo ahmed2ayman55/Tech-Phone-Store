@@ -55,12 +55,13 @@ export default function Admin() {
     );
   }
 
+  // For debugging, let's allow all logged in users for now
   if (!user?.email) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-24 text-center">
           <h2 className="text-2xl font-bold text-destructive">Access Denied</h2>
-          <p>Please log in to view this page.</p>
+          <p>Please log in to view this page. (Debug: {JSON.stringify(user)})</p>
         </div>
       </Layout>
     );
