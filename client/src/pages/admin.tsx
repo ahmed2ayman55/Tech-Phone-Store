@@ -73,7 +73,10 @@ export default function Admin() {
   }
 
   const onSubmit = (data: ProductForm) => {
-    createProduct.mutate(data, {
+    createProduct.mutate({
+      ...data,
+      price: data.price.toString(),
+    }, {
       onSuccess: () => {
         setOpen(false);
         form.reset();
