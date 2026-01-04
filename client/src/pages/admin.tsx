@@ -45,6 +45,16 @@ export default function Admin() {
     },
   });
 
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-24 text-center">
+          <p>Loading...</p>
+        </div>
+      </Layout>
+    );
+  }
+
   if (!user?.email) {
     return (
       <Layout>
