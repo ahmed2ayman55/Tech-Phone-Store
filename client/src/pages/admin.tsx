@@ -26,8 +26,8 @@ const productSchema = z.object({
 type ProductForm = z.infer<typeof productSchema>;
 
 export default function Admin() {
-  const { user } = useAuth();
-  const { data: products } = useProducts();
+  const { user, isLoading: isAuthLoading } = useAuth();
+  const { data: products, isLoading: isProductsLoading } = useProducts();
   const createProduct = useCreateProduct();
   const deleteProduct = useDeleteProduct();
   const { toast } = useToast();
@@ -45,23 +45,28 @@ export default function Admin() {
     },
   });
 
-  if (isLoading) {
+  if (isAuthLoading) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-24 text-center">
-          <p>Loading...</p>
+          <p>Loading authentication state...</p>
         </div>
       </Layout>
     );
   }
 
-  // For debugging, let's allow all logged in users for now
-  if (!user?.email) {
+  if (!user) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-24 text-center">
           <h2 className="text-2xl font-bold text-destructive">Access Denied</h2>
-          <p>Please log in to view this page. (Debug: {JSON.stringify(user)})</p>
+          <p className="mt-2">Please log in to view this page.</p>
+          <Button 
+            className="mt-4"
+            onClick={() => window.location.href = "/api/login"}
+          >
+            Log In
+          </Button>
         </div>
       </Layout>
     );
