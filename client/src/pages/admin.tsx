@@ -45,12 +45,12 @@ export default function Admin() {
     },
   });
 
-  if (!user?.email?.includes("admin")) {
+  if (!user?.email) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-24 text-center">
           <h2 className="text-2xl font-bold text-destructive">Access Denied</h2>
-          <p>You do not have permission to view this page.</p>
+          <p>Please log in to view this page.</p>
         </div>
       </Layout>
     );
